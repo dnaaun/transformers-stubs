@@ -13,7 +13,7 @@ setup(
     long_description_content_type="text/markdown",
     packages=["transformers-stubs"],
     python_requires=">=3.6",
-    install_requires=["transformers==3.0.2", "typing_extensions"],
+    install_requires=["transformers>=2.9", "typing_extensions"],
     package_data={"": ["*.pyi", "py.typed"]},
     extras_require={"dev": ["black", "mypy"]},
     classifiers=[  # classifiers can be found here: https://pypi.org/classifiers/
