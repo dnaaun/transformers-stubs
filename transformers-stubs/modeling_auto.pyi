@@ -21,4 +21,5 @@ class AutoModel:
         **kwargs: Any
     ) -> PreTrainedModel: ...
 
-__all__ = ["AutoModel"]
+class AutoModelForSequenceClassification(AutoModel):
+    pass

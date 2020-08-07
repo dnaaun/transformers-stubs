@@ -1,4 +1,5 @@
 from typing import Optional
+import torch
 
 def default_logdir() -> str: ...
 
@@ -77,5 +78,8 @@ class TrainingArguments:
         dataloader_drop_last: bool = ...,
         eval_steps: int = ...,
         past_index: int = ...,
-    ) -> None:
-        ...,
+    ) -> None: ...
+    @property
+    def device(self) -> torch.device: ...
+    @property
+    def n_gpu(self) -> int: ...
