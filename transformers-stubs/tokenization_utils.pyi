@@ -1,5 +1,5 @@
-from typing import List, Tuple, overload
-from .tokenization_utils_base import PreTrainedTokenizerBase
+from typing import List, overload
+from .tokenization_utils_base import PreTrainedTokenizerBase, TextInput
 
 class PreTrainedTokenizer(PreTrainedTokenizerBase):
     @overload
@@ -11,4 +11,5 @@ class PreTrainedTokenizer(PreTrainedTokenizerBase):
     @overload
     def convert_ids_to_tokens(
         self, ids: List[int], skip_special_tokens: bool = False
-    ) -> List[str]: ...
+    ) -> List[str]: ... 
+    def tokenize(self, text: TextInput) -> List[str]: ...
