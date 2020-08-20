@@ -7,9 +7,6 @@ from typing import (
     Sequence,
     overload,
     Tuple,
-    KeysView,
-    ValuesView,
-    ItemsView,
 )
 
 from tokenizers import Encoding as EncodingFast

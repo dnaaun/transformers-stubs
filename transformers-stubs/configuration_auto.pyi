@@ -1,5 +1,5 @@
 from typing import Any, Dict, Literal, Optional, Tuple, overload
-from .configuration_utils import PretrainedConfig
+from .configuration_utils import PreTrainedConfig
 
 class AutoConfig:
     def __init__(self) -> None: ...
@@ -15,7 +15,7 @@ class AutoConfig:
         resume_download: bool = ...,
         proxies: Optional[Dict[str, str]] = ...,
         **kwargs: Any
-    ) -> Tuple[PretrainedConfig, Dict[str, str]]: ...
+    ) -> Tuple[PreTrainedConfig, Dict[str, str]]: ...
     @overload
     @classmethod
     def from_pretrained(
@@ -28,6 +28,6 @@ class AutoConfig:
         resume_download: bool = ...,
         proxies: Optional[Dict[str, str]] = ...,
         **kwargs: Any
-    ) -> PretrainedConfig: ...
+    ) -> PreTrainedConfig: ...
 
 __all__ = ["AutoConfig"]

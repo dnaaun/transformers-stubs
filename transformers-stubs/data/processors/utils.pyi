@@ -48,7 +48,7 @@ class DataProcessor(abc.ABC, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def get_labels(self) -> List[str]: ...
 
-class SingleSentenceClassificationProcessor(DataProcessor):
+class SingleSentenceClassificationProcessor(DataProcessor): #type: ignore
     labels: List[str]
     examples: List[InputExample]
     mode: Literal["classification", "regression"]
@@ -120,13 +120,4 @@ class SingleSentenceClassificationProcessor(DataProcessor):
         ids: Optional[List[str]] = None,
         overwrite_labels: bool = False,
         overwrite_examples: bool = False,
-    ) -> List[InputExample]: ...
-    def get_features(
-        self,
-        tokenizer: PreTrainedTokenizerBase,
-        max_length: Optional[int] = None,
-        pad_on_left: bool = False,
-        pad_token: int = 0,
-        mask_padding_with_zero: bool = True,
-        return_tensors: int = None,
-    ): ...
+    ) -> List[InputExample]: ... 

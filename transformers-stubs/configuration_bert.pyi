@@ -1,10 +1,10 @@
-from .configuration_utils import PretrainedConfig as PretrainedConfig
+from .configuration_utils import PreTrainedConfig as PreTrainedConfig
 from typing import Any
 
 logger: Any
 BERT_PRETRAINED_CONFIG_ARCHIVE_MAP: Any
 
-class BertConfig(PretrainedConfig):
+class BertConfig(PreTrainedConfig):
     model_type: str = ...
     # vocab_size: Any = ...
     hidden_size: int = ...
