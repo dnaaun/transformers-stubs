@@ -2,9 +2,9 @@ from torch import nn
 import torch
 from torch import Tensor,  dtype, nn
 from .generation_utils import GenerationMixin
-from typing import Tuple, Generic, TypeVar
+from typing import Tuple, Generic, TypeVar, Type
 import typing as T
-from .configuration_utils import PreTrainedConfig
+from .configuration_utils import PretrainedConfig
 
 class ModuleUtilsMixin:
     def num_parameters(self, only_trainable: bool = False) -> int: ...
@@ -19,7 +19,7 @@ class ModuleUtilsMixin:
         self, attention_mask: Tensor, input_shape: Tuple, device: torch.device
     ) -> Tensor: ...
 
-_PreTrainedConfig = TypeVar("_PreTrainedConfig", bound=PreTrainedConfig)
+_PreTrainedConfig = TypeVar("_PreTrainedConfig", bound=PretrainedConfig)
 
 class PreTrainedModel(
     nn.Module, ModuleUtilsMixin, GenerationMixin, Generic[_PreTrainedConfig]
@@ -47,5 +47,5 @@ class PreTrainedModel(
     def save_pretrained(self, save_directory: str) -> None: ...
     @classmethod
     def from_pretrained(
-        cls, pretrained_model_name_or_path: str, *model_args: T.Any, **kwargs: T.Any
+        cls: Type[_PreTrainedModel], pretrained_model_name_or_path: str, *model_args: T.Any, **kwargs: T.Any
     ) -> _PreTrainedModel: ...

@@ -1,10 +1,10 @@
-from .configuration_utils import PreTrainedConfig as PreTrainedConfig
+from .configuration_utils import PretrainedConfig as PretrainedConfig
 from typing import Any
 
 logger: Any
 BERT_PRETRAINED_CONFIG_ARCHIVE_MAP: Any
 
-class BertConfig(PreTrainedConfig):
+class BertConfig(PretrainedConfig):
     model_type: str = ...
     # vocab_size: Any = ...
     hidden_size: int = ...
@@ -35,5 +35,5 @@ class BertConfig(PreTrainedConfig):
         layer_norm_eps: float = ...,
         pad_token_id: int = ...,
         gradient_checkpointing: bool = ...,
-        **kwargs: Any
+        output_hidden_states: bool = ...
     ) -> None: ...

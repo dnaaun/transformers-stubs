@@ -10,7 +10,7 @@ class BertModel(PreTrainedModel):
     config: BertConfig
     class _forward_def(Protocol):
         def __call__(
-            BertModel,
+            self, BertModel,
             input_ids: Optional[Tensor] = None,
             attention_mask: Optional[Tensor] = None,
             token_type_ids: Optional[Tensor] = None,
@@ -21,8 +21,7 @@ class BertModel(PreTrainedModel):
             encoder_attention_mask: Optional[Tensor] = None,
         ) -> Union[
             Tuple[Tensor, Tensor],
-            Tuple[Tensor, Tensor, Tensor],
-            Tuple[Tensor, Tensor, Tensor, Tensor],
+            Tuple[Tensor, Tensor, Tuple[Tensor, ...]],
         ]: ...
     forward: _forward_def
     __call__: _forward_def

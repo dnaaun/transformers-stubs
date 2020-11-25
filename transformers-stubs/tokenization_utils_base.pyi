@@ -1,5 +1,7 @@
 from typing import (
     Union,
+    Type,
+    TypeVar,
     Dict,
     List,
     Any,
@@ -105,7 +107,12 @@ class SpecialTokensMixin:
     @property
     def mask_token(self) -> str: ...
 
+    @property
+    def sep_token_id(self) -> Optional[int]: ...
+
+
 class PreTrainedTokenizerBase(SpecialTokensMixin):
+    _PreTrainedTokenizerBase = TypeVar('_PreTrainedTokenizerBase', bound=PreTrainedTokenizerBase)
     @property
     def max_len(self) -> int: ...
     def __call__(
@@ -148,3 +155,6 @@ class PreTrainedTokenizerBase(SpecialTokensMixin):
         return_tensors: Optional[Union[str, TensorType]] = None,
         **kwargs: Any
     ) -> List[int]: ...
+
+    @classmethod
+    def from_pretrained(cls: Type[_PreTrainedTokenizerBase], pretrained_model_name_or_path: str) -> _PreTrainedTokenizerBase: ...

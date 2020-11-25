@@ -1,8 +1,8 @@
 import typing as T
 
-class PreTrainedConfig:
+class PretrainedConfig:
 
-    _PreTrainedConfig = T.TypeVar("_PreTrainedConfig", bound="PreTrainedConfig")
+    _PreTrainedConfig = T.TypeVar("_PreTrainedConfig", bound="PretrainedConfig")
     model_type: str = ...
     output_hidden_states: bool = False
     output_attentions: bool = False
@@ -36,6 +36,7 @@ class PreTrainedConfig:
     # decoder_start_token_id: T.Optional[int] = ...
     # task_specific_params: Any = ...
     # xla_device: Any = ...
+    def __init__(self, output_hidden_states: bool) -> None: ...
     @property
     def num_labels(self) -> int: ...
     @num_labels.setter
@@ -56,11 +57,13 @@ class PreTrainedConfig:
     @classmethod
     def from_pretrained(
         cls: T.Type[_PreTrainedConfig],
+        pretrained_model_name_or_path: str,
         return_unused_kwargs: T.Literal[True] = True,
         cache_dir: T.Optional[str] = None,
         force_download: bool = False,
         resume_download: bool = False,
         proxies: T.Optional[T.Dict[str, str]] = None,
+        output_hidden_states: bool = ...,
         **kwargs: T.Any,
     ) -> T.Tuple["_PreTrainedConfig", T.Dict[str, T.Any]]: ...
     @classmethod

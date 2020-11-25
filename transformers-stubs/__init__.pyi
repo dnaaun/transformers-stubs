@@ -1,5 +1,6 @@
 # flake8: noqa
 from .configuration_auto import AutoConfig as AutoConfig
+from .configuration_bert import BertConfig as BertConfig
 
 from .data import (
     DataProcessor as DataProcessor,

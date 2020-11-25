@@ -1,4 +1,5 @@
-from .tokenization_utils_base import PreTrainedTokenizerBase as PreTrainedTokenizerBase
+from .tokenization_utils import PreTrainedTokenizer
+from .tokenization_utils_fast import PreTrainedTokenizerFast
 from typing import Any, Dict, Optional, overload
 
 class AutoTokenizer:
@@ -14,6 +15,6 @@ class AutoTokenizer:
         proxies: Optional[Dict[str, str]] = ...,
         use_fast: bool = ...,
         **kwargs: Any
-    ) -> PreTrainedTokenizerBase: ...
+    ) -> Union[PreTrainedTokenizer, PreTrainedTokenizerFast]: ...
 
 __all__ = ["AutoTokenizer"]
