@@ -1,8 +1,9 @@
 from torch import nn
 import torch
-from torch import Tensor,  dtype, nn
+from torch import Tensor,  dtype as dtype_, nn
+from typing_extensions import ParamSpec
 from .generation_utils import GenerationMixin
-from typing import Tuple, Generic, TypeVar, Type
+from typing import Callable, Tuple, Generic, TypeVar, Type
 import typing as T
 from .configuration_utils import PretrainedConfig
 
@@ -13,18 +14,27 @@ class ModuleUtilsMixin:
     @property
     def device(self) -> torch.device: ...
     @property
-    def dtype(self) -> dtype: ...
+    def dtype(self) -> dtype_: ...
     def invert_attention_mask(self, encoder_attention_mask: Tensor) -> Tensor: ...
     def get_extended_attention_mask(
         self, attention_mask: Tensor, input_shape: Tuple, device: torch.device
     ) -> Tensor: ...
 
 _PreTrainedConfig = TypeVar("_PreTrainedConfig", bound=PretrainedConfig)
+_ForwardParams = ParamSpec("_ForwardParams")
+_ForwardReturn = TypeVar("_ForwardReturn")
+
+class MyModule(nn.Module, Generic[_ForwardParams, _ForwardReturn]):
+    forward: Callable[_ForwardParams, _ForwardReturn]
+    __call__: Callable[_ForwardParams, _ForwardReturn]
+
 
 class PreTrainedModel(
-    nn.Module, ModuleUtilsMixin, GenerationMixin, Generic[_PreTrainedConfig]
+    MyModule[_ForwardParams, _ForwardReturn],
+    ModuleUtilsMixin,
+    GenerationMixin,
+    Generic[_ForwardParams, _ForwardReturn, _PreTrainedConfig],
 ):
-
     # Subclass type
     _PreTrainedModel = T.TypeVar("_PreTrainedModel", bound="PreTrainedModel")
 
@@ -47,5 +57,8 @@ class PreTrainedModel(
     def save_pretrained(self, save_directory: str) -> None: ...
     @classmethod
     def from_pretrained(
-        cls: Type[_PreTrainedModel], pretrained_model_name_or_path: str, *model_args: T.Any, **kwargs: T.Any
+        cls: Type[_PreTrainedModel],
+        pretrained_model_name_or_path: str,
+        *model_args: T.Any,
+        **kwargs: T.Any
     ) -> _PreTrainedModel: ...
